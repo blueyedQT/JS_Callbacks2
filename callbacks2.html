@@ -1,0 +1,18 @@
+<html>
+<head>
+	<title>Callbacks 2</title>
+	<script src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+</head>
+<body>
+	<script>
+		function send_something_via_ajax(callback) {
+			$.get('http://api.openweathermap.org/data/2.5/weather?q=London,uk', function(output) {
+				callback(output);
+			},  'json');
+		}
+		send_something_via_ajax(function(output){console.log(output)});
+		send_something_via_ajax(function(output){$('body').append('<h1>'+output.weather[0].description+'<h1>')});	
+		send_something_via_ajax(function(output){$('h1').fadeOut(), $('body').append('<p>Third method call sucess!<p>');});
+	</script>
+</body>
+</html>
